@@ -1,2 +1,2 @@
-# Litcd
-github repo for Litcd
+# Prototypes-main
+Standardized environment for testing logic flow and dependency management
