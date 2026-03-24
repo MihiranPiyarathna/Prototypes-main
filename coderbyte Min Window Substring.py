@@ -11,6 +11,7 @@ Tags
 string manipulationsearchinghash tableGoogleFacebookAmazonfreevideo
 """
 strArr = ["ahffaksfajeeubsne", "jefaa"]
+strArr = ["aaffsfsfasfasfasfasfasfacasfafe", "fafe"]
 N = strArr[0]
 K = strArr[1]
 
@@ -61,14 +62,14 @@ Nlen= len(Nlist)
 Klen= len(Klist)
 a=0
 b= Klen
-cnt=0
 validwind={}
-# init window
+cnt=0
 
+# init window
 wnd= Nlist[a:b]
-while b<=Nlen and cnt <20:
-    print(wnd)
+while b<=Nlen and cnt <100:
     if isvalid(wnd,Klist):
+        print(wnd)
         validwind[''.join(wnd)] = len(wnd)
         # collapse window
         a +=1
