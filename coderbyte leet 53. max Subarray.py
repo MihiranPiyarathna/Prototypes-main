@@ -38,8 +38,22 @@ arr= [3, -1, -1, 4, 3, -1] # 8 from [3, -1, -1, 4, 3]
 # kadane's algorithm
 ###############
 
+# https://coderbyte.com/video/max-subarray-solution # solution from coderbyte
+# kadane one to one code from gpt
+def maxSubArray_web(arr):
+    max_sum = arr[0]
+    current_sum = arr[0]
+
+    for i in range(1, len(arr)):
+        print(i)
+        current_sum = max(arr[i], current_sum + arr[i])
+        max_sum = max(max_sum, current_sum)
+
+    return max_sum
+
+print( maxSubArray_web(arr)) # 1 # correct
+
 # coderbyte concept 
-# class Solution:
 def maxSubArray(arr):
 
         a=0
@@ -56,3 +70,4 @@ def maxSubArray(arr):
 
 print(maxSubArray(arr))
 # fails when all numbers are negative
+# this is because I didn't keep track of the global sum

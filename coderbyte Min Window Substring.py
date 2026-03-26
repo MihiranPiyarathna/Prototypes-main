@@ -83,4 +83,4 @@ while b<=Nlen and cnt <100:
 
 
 # retn the min win
-strArr = min(validwind, key= validwind.get)
+# strArr = min(validwind, key= validwind.get)
