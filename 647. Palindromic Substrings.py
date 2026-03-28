@@ -35,8 +35,7 @@ s = "abc"
 s = "aaa"
 
 
-def countSubstrings(s):
-    #
+def countSubstrings(s):#
     
         def ispalin(s):
             if len(s)<1:
@@ -80,3 +79,54 @@ def countSubstrings(s):
         return palincnt
 
 countSubstrings(s)
+# turns out above is o(n**3)
+
+
+# trying out Leet niits solution
+
+s= list(s)
+s_len = len(s)
+palincnt=0
+for i in range (s_len):
+    oddL = s[i]
+    oddR = s[i]
+    palincnt +=1
+    print( oddL, oddR)
+
+    evenL = s[i]
+    evenR = s[i+1]
+    if evenL == evenR:
+        palincnt +=1
+        print( evenL, evenR)
+
+    for j in range (1,s_len-i+1):
+        oddL = s[i-j]
+        oddR = s[i+j]
+        if oddL == oddR:
+            palincnt +=1
+            print( oddL, oddR)
+        evenL = s[i-j]
+        evenR = s[i+1+j]
+        if evenL == evenR:
+            palincnt +=1
+            print( evenL, evenR)
+
+print(palincnt)
+# multiple out of bounds errors
+
+# paraphrasing niits code from memory
+
+s_len = len(s)
+def countpalin(s, l, r):
+    palincnt = 0
+    while l>=0 and r<s_len and s[l]==s[r]:
+        print( s[l], s[r])
+        palincnt +=1
+        l -=1
+        r +=1
+    return palincnt
+palintot = 0
+for i in range(len(s)):
+    palintot += countpalin(s,i,i)
+    palintot += countpalin(s,i,i+1)
+print(palintot)
