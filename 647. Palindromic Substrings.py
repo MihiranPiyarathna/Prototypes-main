@@ -31,8 +31,8 @@ s consists of lowercase English letters.
 """
 # sliding window question
 
-s = "abc"
-s = "aaa"
+s = "abc" # 3
+s = "aaa" # 6
 
 
 def countSubstrings(s):#
