@@ -41,15 +41,40 @@ pos is -1 or a valid index in the linked-list.
 
 Follow up: Can you solve it using O(1) (i.e. constant) memory?
 """
-head = [3,2,0,-4]
+
+from typing import Optional # imports the Optional type hint from Python's typing module. Type hints are annotations that indicate what data types a function expects and returns, making your code more readable
+head = [3,2,0,-4] # leet prob states as head, but this is not a head
 
 
 # Definition for singly-linked list.
 class ListNode:
-    def __init__(self, x):
+    def __init__(self, x, n=None): # added next
         self.val = x
-        self.next = None
+        self.next = n
 
 class Solution:
-    def hasCycle(self, head: [ListNode]) -> bool:
-        print(head.next)
+    def hasCycle(self, head: Optional[ListNode]) -> bool: # head not really optional
+    
+        fast = head
+        slow = head
+        
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            
+            if fast == slow:
+                return True
+    
+        return False
+
+LinkedList = [ListNode(i) for i in head] # convert values in the list to seperate nodes
+# for i in range(len( LinkedList)):
+#     f"n{i+1}"=LinkedList[i] # CAN'T assign val to a computed string.. Can assign like this to a dict key though..
+
+n1,n2,n3,n4 = LinkedList[0],LinkedList[1],LinkedList[2],LinkedList[3]
+n1.next = n2
+n2.next = n3
+n3.next = n4
+n4.next = n2
+
+Solution().hasCycle(n1)
