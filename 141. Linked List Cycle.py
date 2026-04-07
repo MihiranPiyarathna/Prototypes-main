@@ -55,6 +55,7 @@ class ListNode:
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool: # head not really optional
     
+        # code from niit solution
         fast = head
         slow = head
         
