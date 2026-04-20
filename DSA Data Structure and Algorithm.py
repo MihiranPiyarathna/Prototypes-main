@@ -26,3 +26,80 @@ https://youtu.be/Z_c4byLrNBU
 ⌨️ (1:11:36) Priority Queue/heap practice problems
 """
 
+########
+# hash map ie. lists, dicts
+# two sum
+
+nums = [2,7,11,15]
+target = 9
+
+for i in range(len(nums)):
+    c= (target - nums[i])
+    if c in nums[i:]:
+        print(i, nums.index(c) )
+
+# can use two pointer meth which is O(n) but tackles all pairs -usually O(n^2)
+"""
+Example (Two Sum on a sorted list):
+If you need to find a pair that sums to 10, you put one pointer at the start and one at the end.
+
+If the sum is too high, move the right pointer left.
+
+If the sum is too low, move the left pointer right.
+
+Why it works: Because the list is sorted, moving a pointer "discards" thousands of pairs that you know won't work, so you don't have to visit them.
+"""
+
+########
+# sliding window - static
+########
+
+# largest sum in subarrays of length k
+
+nums = [1,2,3,7,4,1]
+k=3
+
+sums=0
+left = 0
+right = k
+while right<=len(nums):
+    sums = max(sum(nums[left:right]), sums)
+
+    left +=1
+    right +=1
+print(sums)
+
+
+########
+# sliding window - dynamic
+########
+
+# longest substring wihtout repeating characters
+
+str = "abccabdcabcc" 
+
+def isunq(wnd_):
+    if len(wnd) == 1:
+        return True
+    dict={}
+    for e in wnd_:
+        dict[e] = dict.get(e, 0) + 1
+    if max(dict.values())>1:
+        return False
+    else:
+        return True
+
+cnt = 1
+left = 0
+right = 1
+
+while right < len(str):
+    wnd = str[left:right]
+    
+    if isunq(wnd):
+        right +=1
+        cnt = max(len(wnd), cnt)
+        print(wnd)
+    else:
+        left +=1
+print(cnt)
