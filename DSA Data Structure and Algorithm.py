@@ -76,7 +76,7 @@ print(sums)
 
 # longest substring wihtout repeating characters
 
-str = "abccabdcabcc" 
+str_ = "abccabdcabcc" 
 
 def isunq(wnd_):
     if len(wnd) == 1:
@@ -93,8 +93,8 @@ cnt = 1
 left = 0
 right = 1
 
-while right < len(str):
-    wnd = str[left:right]
+while right < len(str_):
+    wnd = str_[left:right]
     
     if isunq(wnd):
         right +=1
@@ -103,3 +103,58 @@ while right < len(str):
     else:
         left +=1
 print(cnt)
+
+
+###########
+# O(n) way from the DSA video
+# https://youtu.be/Z_c4byLrNBU?t=2172
+###########
+
+
+###########
+# BFS - Bredth first Search
+###########
+
+# BFS for Trees & BFS for graphs
+
+# Leet problem - 102. Binary Tree Level Order Traversal
+# https://leetcode.com/problems/binary-tree-level-order-traversal/submissions/1985701294/
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+Node20 = TreeNode(20, TreeNode(15), TreeNode(7))
+root = TreeNode(3, TreeNode(9), Node20)
+
+# test # root = []
+
+### answer in bfs ###
+from collections import deque # double ended queue # a high performance queue
+
+q = deque([root])
+biglist = []
+
+while len(q)>0:
+    n = len(q)
+    new_level = []
+
+    for _ in range(n):
+        node = q.popleft()
+        if node: new_level.append(node.val)
+        
+        if node.left is not None: q.append(node.left)
+        if node.right is not None: q.append(node.right)
+
+    biglist.append(new_level)
+print(biglist)
+# pass beats 100% mem 90.6% 
+
+
+##########
+# 733. Flood Fill - leetcode bfs
+##########
+
+
