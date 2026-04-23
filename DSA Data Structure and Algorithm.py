@@ -157,4 +157,44 @@ print(biglist)
 # 733. Flood Fill - leetcode bfs
 ##########
 
+def get_neighbors (coord, color):
+    row,col = coord
+    rowlen = len(image)
+    collen = len(image[0])
+    
+    # neighbor patterns
+    rowpattern = [-1,0,1,0]
+    colpattern = [0,1,0,-1]
+    for i in range(len(rowpattern)):
+        neighbor_row = row + rowpattern[i]
+        neighbor_col = col + colpattern[i]
+        if 0 <= neighbor_row <rowlen and 0<= neighbor_col <collen:
+            if image[neighbor_row][neighbor_col]==color:
+                yield neighbor_row, neighbor_col
+
+image = [[1,1,1],
+         [1,1,0],
+         [1,0,1]]
+sr = 1
+sc = 1 
+color = 2
+
+from collections import deque, defaultdict
+q = deque([[sr,sc]])
+visited=defaultdict(int)
+prevclr = image[sr][sc]
+
+while len(q)>0:
+    node = q.popleft() # remove node
+    [sr,sc] = node
+    visited[(sr,sc)]=1 # remember node
+    
+    image[sr][sc] = color # process node
+    for k in get_neighbors((sr,sc), prevclr):
+        i,j = k
+        if visited[(i,j)]<1:
+            visited[(i,j)] +=1
+            q.append([i,j])
+# print(image)
+# beats 0.77% in runtime 52% in mem
 
