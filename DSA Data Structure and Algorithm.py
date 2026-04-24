@@ -131,7 +131,7 @@ root = TreeNode(3, TreeNode(9), Node20)
 
 # test # root = []
 
-### answer in bfs ###
+### answer in bfs - binary tree ###
 from collections import deque # double ended queue # a high performance queue
 
 q = deque([root])
@@ -154,7 +154,7 @@ print(biglist)
 
 
 ##########
-# 733. Flood Fill - leetcode bfs
+# 733. Flood Fill - leetcode graph bfs
 ##########
 
 def get_neighbors (coord, color):
@@ -184,6 +184,7 @@ q = deque([[sr,sc]])
 visited=defaultdict(int)
 prevclr = image[sr][sc]
 
+# actual BFS part
 while len(q)>0:
     node = q.popleft() # remove node
     [sr,sc] = node
@@ -197,4 +198,36 @@ while len(q)>0:
             q.append([i,j])
 # print(image)
 # beats 0.77% in runtime 52% in mem
+# this is because DFS is the best approach, I'll learn it now..
 
+
+##########
+# DFS - Depth First Search
+##########
+
+# 104. Maximum Depth of Binary Tree
+# DFS - for tree
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val=val
+        self.left=left
+        self.right = right
+
+Node20 = TreeNode(20,TreeNode(15), TreeNode(7))
+root = TreeNode(3, TreeNode(9), Node20)
+
+def get_children(root):
+    if root is None:
+        return None
+    delta = ["right","left" ]
+    for child in delta:
+        yield getattr(root, child)
+
+def dfs (root):
+    for child in get_children(root):
+        c = child.val if child is not None else None
+        print(c)
+        dfs(child)
+
+dfs(root)
