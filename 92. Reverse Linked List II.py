@@ -34,8 +34,47 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+    def __str__(self):
+        return str(self.val)
+    def printNode(self):
+        from copy import deepcopy
+        Node = copy.deepcopy(self)
+        while Node:
+            print(Node.val)
+            Node = Node.next
 
+# del ListNode
+
+li = [1,2,3,4,5]
+dummy = ListNode()
+tail = dummy
+for val in li:
+    tail.next = ListNode(val)
+    tail = tail.next
+head = dummy.next
+
+head.printNode()
 
 class Solution:
+    def reverse(self, head):
+        back = None
+        curr = head
+        while curr:
+            front = curr.next if curr.next else None
+            print(back, curr.val, front)
+            curr.next = back
+            back, curr = curr, front
+        back.printNode()
     def reverseBetween(self, head, left: int, right: int):
-        
+        position = 1
+        while head:
+            print(position, head.val)
+            head = head.next
+            position +=1
+
+
+
+
+# Solution().reverseBetween()
+# left = 2
+# right = 4
