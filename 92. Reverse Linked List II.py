@@ -37,6 +37,7 @@ class ListNode:
     def __str__(self):
         return str(self.val)
     def printNode(self):
+        import copy
         from copy import deepcopy
         Node = copy.deepcopy(self)
         while Node:
@@ -44,6 +45,7 @@ class ListNode:
             Node = Node.next
 
 # del ListNode
+# del Solution
 
 li = [1,2,3,4,5]
 dummy = ListNode()
@@ -69,10 +71,20 @@ class Solution:
         position = 1
         while head:
             print(position, head.val)
+            if position< left: lastFNode = head 
+            while left< position <=right:
+                head_prime, curr = head, head
+                lastFNode.next = head_prime
+                front = curr.next
+                curr.next = prev
+                prev, curr = curr, front
+                tail_prime.next = front
+                position +=1
+            tail_prime, prev = head, head
             head = head.next
             position +=1
 
-
+Solution().reverseBetween(head,2,4)
 
 
 # Solution().reverseBetween()
