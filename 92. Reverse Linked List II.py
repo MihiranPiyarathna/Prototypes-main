@@ -85,8 +85,25 @@ class Solution:
             position +=1
 
 Solution().reverseBetween(head,2,4)
+# throws error
 
+# attempt 2
+# left, right = 2,4
 
-# Solution().reverseBetween()
-# left = 2
-# right = 4
+class Solution:
+    def reverseBetween(self, head, left: int, right: int):
+        if left == right: return head
+        dummy = ListNode(0, head)
+        position = 0
+        curr = dummy
+        while curr:
+            while left <= position<= right:
+                prev, curr = curr, curr.next
+                front = curr.next
+                print(position, prev.val, curr.val, front.val)
+                
+                curr = curr.next
+                position +=1
+            curr = curr.next
+            position +=1
+        
