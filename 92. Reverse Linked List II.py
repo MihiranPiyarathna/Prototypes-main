@@ -83,27 +83,34 @@ class Solution:
             tail_prime, prev = head, head
             head = head.next
             position +=1
-
-Solution().reverseBetween(head,2,4)
 # throws error
 
-# attempt 2
-# left, right = 2,4
+Solution().reverseBetween(head,2,4)
+Solution().reverseBetween(head,1,5)
 
+
+# attempt 2
 class Solution:
     def reverseBetween(self, head, left: int, right: int):
         if left == right: return head
         dummy = ListNode(0, head)
-        position = 0
-        curr = dummy
+        position = 1
+        prev,last = dummy, dummy
+        curr = dummy.next
         while curr:
-            while left <= position<= right:
-                prev, curr = curr, curr.next
+            while left < position <= right:
                 front = curr.next
-                print(position, prev.val, curr.val, front.val)
-                
-                curr = curr.next
+                curr.next = prev                
+                print(position, prev.val, curr.val, front)
+                prev, curr = curr, front
                 position +=1
-            curr = curr.next
+            
+            if position == left-1: last = curr
+            if position == right+1:
+                last.next.next = curr # since advanced
+                last.next = prev # since advanced
+                dummy.next.printNode()
+                return dummy.next
+            prev, curr = curr, curr.next
             position +=1
-        
+# pass, 4ms, beats 1%       
