@@ -133,6 +133,7 @@ root = TreeNodeBFS(3, TreeNodeBFS(9), Node20)
 
 ### answer in bfs - binary tree ###
 from collections import deque # double ended queue # a high performance queue
+# form of Stack since pop and popleft in O(1) time
 
 q = deque([root])
 biglist = []
@@ -341,3 +342,7 @@ def testfunc():
 
 testfunc()
 
+# Backtracking is when we revert travelling through a tree using DFS
+# 
+# Priority Queue / Heap is when we store data in a min heap for O(log n) retrieval
+# https://youtu.be/Z_c4byLrNBU?t=4289 
