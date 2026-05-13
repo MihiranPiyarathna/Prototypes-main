@@ -100,7 +100,7 @@ The result is ordered by sample_id in ascending order
 For each pattern, 1 indicates the pattern is present and 0 indicates it is not present
 */
 
-CREATE DATABASE LIT;
+-- CREATE DATABASE LIT;
 USE LIT;
 
 DROP TABLE IF EXISTS SAMPLES;
@@ -122,16 +122,40 @@ insert into Samples (sample_id, dna_sequence, species) values ('7', 'CGTATGCGTCG
 -- EXEC SP_HELP SAMPLES;
 -- ALTER TABLE SAMPLES DROP CONSTRAINT DF__Samples__has_sta__49C3F6B7 , CK__Samples__has_sta__4AB81AF0;
 -- ALTER TABLE SAMPLES DROP COLUMN has_start;
-ALTER TABLE SAMPLES ADD "has_start" TINYINT NOT NULL DEFAULT 0 CHECK(has_start IN (0,1)); 
-ALTER TABLE SAMPLES ADD "has_stop" TINYINT NOT NULL DEFAULT 0 CHECK(has_stop IN (0,1));
-ALTER TABLE SAMPLES ADD "has_atat" TINYINT NOT NULL DEFAULT 0 CHECK(has_atat IN (0,1));
-ALTER TABLE SAMPLES ADD "has_ggg" TINYINT NOT NULL DEFAULT 0 CHECK(has_ggg IN (0,1));
+-- ALTER TABLE SAMPLES ADD "has_start" TINYINT NOT NULL DEFAULT 0 CHECK(has_start IN (0,1)); 
+-- ALTER TABLE SAMPLES ADD "has_stop" TINYINT NOT NULL DEFAULT 0 CHECK(has_stop IN (0,1));
+-- ALTER TABLE SAMPLES ADD "has_atat" TINYINT NOT NULL DEFAULT 0 CHECK(has_atat IN (0,1));
+-- ALTER TABLE SAMPLES ADD "has_ggg" TINYINT NOT NULL DEFAULT 0 CHECK(has_ggg IN (0,1));
 
-UPDATE SAMPLES SET "has_start" = 1 WHERE dna_sequence LIKE 'ATG%';
-UPDATE SAMPLES SET "has_stop" = 1 WHERE dna_sequence LIKE '%TAA' OR
-dna_sequence LIKE '%TAG' OR
-dna_sequence LIKE '%TGA';
-UPDATE SAMPLES SET "has_atat" = 1 WHERE dna_sequence LIKE '%ATAT%';
-UPDATE SAMPLES SET "has_ggg" = 1 WHERE dna_sequence LIKE '%GGG%';
+-- UPDATE SAMPLES SET "has_start" = 1 WHERE dna_sequence LIKE 'ATG%';
+-- UPDATE SAMPLES SET "has_stop" = 1 WHERE dna_sequence LIKE '%TAA' OR
+-- dna_sequence LIKE '%TAG' OR
+-- dna_sequence LIKE '%TGA';
+-- UPDATE SAMPLES SET "has_atat" = 1 WHERE dna_sequence LIKE '%ATAT%';
+-- UPDATE SAMPLES SET "has_ggg" = 1 WHERE dna_sequence LIKE '%GGG%';
 
 SELECT * FROM Samples;
+
+-- Or Lit solution without adding source table columns
+-- Leetcode solution
+
+select  sample_id, dna_sequence, species, 
+   (case when dna_sequence like 'ATG%' then 1  else 0 end) as has_start,
+   (case when regexp_like (dna_sequence,'TAA$|TAG$|TGA$') then 1 else 0 end) as has_stop,
+   (case when dna_sequence like '%ATAT%' then 1 else 0 end) as has_atat,
+   (case when dna_sequence like '%GGG%' then 1 else 0 end) as has_ggg
+from Samples;
+-- 291ms, beats 52.76
+
+-- OR USE INLINE-IF
+SELECT IIF(5<3,'t','f')
+
+SELECT * , 
+IIF(dna_sequence LIKE 'ATG%',1,0) AS has_start, 
+IIF(dna_sequence LIKE '%TAA' OR
+dna_sequence LIKE '%TAG' OR
+dna_sequence LIKE '%TGA', 1,0) AS has_stop, 
+IIF(dna_sequence LIKE '%ATAT%',1,0) AS has_atat, 
+IIF(dna_sequence LIKE '%GGG%',1,0) AS has_ggg 
+FROM SAMPLES;
+-- beats 283ms, 63.32% 
