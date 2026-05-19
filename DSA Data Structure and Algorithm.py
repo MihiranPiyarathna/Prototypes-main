@@ -344,5 +344,8 @@ testfunc()
 
 # Backtracking is when we revert travelling through a tree using DFS
 # 
-# Priority Queue / Heap is when we store data in a min heap for O(log n) retrieval
+# Stack -> just a list when we use append and pop exclusively to add, remv (like a stack)
+#
+# Priority Queue / Heap -> when we store data in a min heap for O(log n) retrieval
+# from heapq import heappop, heappush
 # https://youtu.be/Z_c4byLrNBU?t=4289 
