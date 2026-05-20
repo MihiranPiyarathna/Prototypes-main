@@ -13,7 +13,7 @@ Output: -1 2 4 -1 1
 Tags
 arraydynamic programmingdata science
 """
-arr = [5, 3, 1, 9, 7, 3, 4, 1]
+# arr = [5, 3, 1, 9, 7, 3, 4, 1]
 arr = [2, 4, 5, 1, 7]
 
 def NearestSmallerValues(arr):
@@ -28,5 +28,5 @@ def NearestSmallerValues(arr):
     # print(ans)
     return (" ".join(str(e) for e in ans))
 
-NearestSmallerValues(arr)
+print(NearestSmallerValues(arr))
 # 
