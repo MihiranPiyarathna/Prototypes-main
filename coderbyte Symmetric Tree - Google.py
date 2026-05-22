@@ -22,34 +22,22 @@ arraybinary treesearchingheapGoogleFacebook
 strArr = ["4", "3", "4"] # false
 strArr = ["10", "2", "2", "#", "1", "1", "#"] # true
 
-class Treenode:
-    def __init__(self, left = None, right = None, val = '0'):
-        self.left = left
-        self.right = right
-        val = val
+# didn't know technique, found from solutions: https://youtu.be/ywAZyIjRmoo?t=55
 
-# build the testcase
-left = Treenode('#','1','2')
-right = Treenode('#','1','2')
-root = Treenode(left,right,'10')
+def SymmetricTree(strArr):
 
-# solution for a proper Tree class
+    def is_mirror(left, right, p):
+        # if not left and not right: return True
+        if left>=n and right>= n: return True
+        return strArr[left]== strArr[right] and is_mirror(left+2**p, right+2**(p+1), p+1) and is_mirror(left+1+2**p, right-1+2**(p+1), p+1)
 
-def SymmetricTree(root):
-    from collections import deque
-    
-    def isSymt(node):
-        if not node or node.left or node.right or node.left.val != node.right.val:
-            return False
-        else:
-            return True
+    # how to traverse - power of 2
+    strArr = strArr[1:]
+    p= 1
+    n= len(strArr)
+    return is_mirror(0,1,1)
 
-    # bfs for traversal
-    queue = deque()
-    queue.append(root)
-    while queue:
-        if not isSymt(queue.popleft()): return False
-    return True
 
-SymmetricTree(root)
-# fails since isSymt return false when met with a None
+# from collections import deque
+SymmetricTree(strArr)
+# pass ; only traversal forulae is mine. theory from web 
