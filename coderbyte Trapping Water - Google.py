@@ -46,7 +46,7 @@ height = [4,2,0,3,2,5] # res = 9
 height = [0,1,0,2,1,0,1,3,2,1,2,1] # res = 6
 
 # class Solution:
-def trap(height):
+def trap_my(height):
         if len(height)<3: return 0
         # finding next greater building
 
@@ -75,6 +75,36 @@ def trap(height):
             water += collected(0)
         return water
 
-print(trap(height))
+print(trap_my(height))
 # needs to be better, for longer arrays, takes too many repeats
 # spent 45hrs since start
+
+##########
+
+# more robust O(n) solution from niit in leet
+height =  [3, 0, 0, 2, 0, 4] # res = 10
+
+def trap(height):
+        if len(height)<3: return 0
+        trapped = 0
+        l = 0
+        r = len(height)-1
+        l_tallest, r_tallest = l,r
+
+        while l != r:
+            if height[l] <= height[r]:
+                if height[l] >= height[l_tallest]: l_tallest = l
+                delta = height[l_tallest] - height[l]
+                # delta = delta if delta>0 else 0
+                trapped += delta
+                l +=1
+            else:
+                if height[r] >= height[r_tallest]: r_tallest = r
+                delta = height[r_tallest] - height[r]
+                # delta = delta if delta>0 else 0
+                trapped += delta
+                r -=1
+        return trapped
+
+print(trap(height))
+
