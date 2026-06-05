@@ -25,7 +25,7 @@ strArr = ["[3, 2, 1, 12, 4, 5, 13]", "5", "13"] # Output: 12
 
 # BinarySearchTreeLCA(strArr)
 
-#### holding for leetcode problem ####
+#### holding coderbyte for leetcode problem ####
 #### still don't know how to create a BST given a preorder traversal array
 
 #### Leetcode
@@ -88,18 +88,75 @@ class TreeNode:
         self.left = None
         self.right = None
 
+
+# building the tree... (func copird from "DSA construct BT from level ord traversal")
+def TreeFromLevelOrdArray (strArr):
+    """
+    docs here
+    """
+    from collections import deque
+    if not strArr or len(strArr)==0 or strArr[0] == None: return None
+    root = TreeNode(strArr[0])
+    queue = deque([root])
+    pointer = 1
+    while queue and pointer< len(strArr):
+        node = queue.popleft()
+        if pointer<len(strArr) and strArr[pointer] is not None:
+            node.left = TreeNode(strArr[pointer])
+            queue.append(node.left)
+        pointer +=1
+        if pointer<len(strArr) and strArr[pointer] is not None: # safeguards when list has odd no. elems
+            node.right = TreeNode(strArr[pointer])
+            queue.append(node.right)
+        pointer +=1
+
+    if root: return root
+
+# root = TreeFromLevelOrdArray(strArr)
+
+root = TreeFromLevelOrdArray([6,2,8,0,4,7,9,None,None,3,5])# , 
+p = TreeNode(2)
+q = TreeNode(8)
+# Output: 6
+
+root = TreeFromLevelOrdArray([6,2,8,0,4,7,9,None,None,3,5])# , 
+p = TreeNode(2)
+q = TreeNode(4)
+# Output: 2
+
+root = TreeFromLevelOrdArray([2,1])# , 
+p = TreeNode(2)
+q = TreeNode(1)
+# Output: 2
+
+# root.right.left.right.val
+
+# my solution first and then neet's solution from yt
+# fails at either when the node is itself a descedent or when both p,q are children
+
+# class Solution_my:
+#     def lowestCommonAncestor_my(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+#         count = 0
+#         def dfs(root):
+#             nonlocal count
+#             if root:
+#                 dfs(root.left)
+#                 if count ==2: return root.left
+#                 dfs(root.right)
+#                 if count ==2: return root#.right
+#                 if root == p or root==q: count +=1
+#                 if count ==2: return root
+#         return dfs(root)
+
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        count = 0
-        def dfs(root):
-            nonlocal count
-            if root:
-                dfs(root.left)
-                if count ==2: return root.left
-                dfs(root.right)
-                if count ==2: return root#.right
-                if root == p or root==q: count +=1
-                if count ==2: return root
+        def dfs(node):
+            if not node: return None
+            x = node.val
+            if node.val< p.val and node.val<q.val: return dfs(node.right)
+            if node.val> p.val and node.val>q.val: return dfs(node.left)
+            if (node.val-p.val) * (node.val-q.val) <=0: # turns out not really necessary
+                return node
         return dfs(root)
 
-# fails
+print(Solution().lowestCommonAncestor(root,p,q).val)
