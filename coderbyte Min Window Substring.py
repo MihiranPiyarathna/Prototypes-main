@@ -10,6 +10,7 @@ Output: affhkkse
 Tags
 string manipulationsearchinghash tableGoogleFacebookAmazonfreevideo
 """
+strArr = ["aabdccdbcacd", "aad"] #"aabd"
 strArr = ["ahffaksfajeeubsne", "jefaa"]
 strArr = ["aaffsfsfasfasfasfasfasfacasfafe", "fafe"]
 N = strArr[0]
@@ -79,8 +80,32 @@ while b<=Nlen and cnt <100:
     wnd = Nlist[a:b]
 
     cnt += 1
-###############
 
 
 # retn the min win
 # strArr = min(validwind, key= validwind.get)
+
+###############
+# coderbyte solution
+###############
+
+from collections import Counter
+
+EMPTY_COUNTER = Counter()
+
+def MinWindowSubstring(strArr):
+  N, K = strArr
+  frequencyK = Counter(K)
+  options = []
+  for i in range(len(N)):
+    curr = Counter()
+    for j in range(i, len(N)):
+      curr[N[j]] += 1
+      if frequencyK - curr == EMPTY_COUNTER:
+        options.append(N[i:j + 1])
+        break
+  return min(options, key=len)
+      
+
+# keep this function call here 
+print(MinWindowSubstring(input()))

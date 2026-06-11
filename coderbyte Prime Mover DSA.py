@@ -13,13 +13,15 @@ math fundamentalsprime numbers
 
 num = 9 # 23
 num = 100 # 541
-num = 1000 # 541
+num = 1000 # 7919
 
 def PrimeMover(num):
-  def isprime(e):
-    for i in range(2, e):
+  from math import sqrt
+  def isprime(e):   
+    for i in range(2, int(sqrt(e)+1)): # important since if n has a factor > sqrt(n) it has one lower as well.
       if e%i ==0:
         return False
+    # print(e)
     return True
   
   if num == 1: return 2

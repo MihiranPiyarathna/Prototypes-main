@@ -15,7 +15,7 @@ strParam = "5556293383563665"
 strParam = "5788888888882339999"
 strParam = "4444"
 
-def NumberStream(strParam):
+def NumberStream_my(strParam):
 
   # code goes here
   # sliding window
@@ -40,5 +40,18 @@ def NumberStream(strParam):
             left, right = right, right+1
     return False
 
-NumberStream(strParam)
+NumberStream_my(strParam)
 # pass
+
+
+##### coderbyte solution #####
+def NumberStream(str):
+  for el in str:
+    if int(el)*el in str:
+      return 'true'
+      
+  return 'false'
+
+# keep this function call here 
+print(NumberStream(input()))
+##### coderbyte solution #####

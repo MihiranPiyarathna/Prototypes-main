@@ -34,3 +34,37 @@ def TreeConstructor(strArr):
     return True
 
 TreeConstructor(strArr)
+# pass
+
+###########
+# another good coderbyte solution
+###########
+
+def TreeConstructor_web(strArr):
+  root = ''
+  ptc = {} # parent to child
+  ctp = {}  # child to parent
+  for s in strArr:
+    c = s.split(',')[0][1:]  # find child
+    p = s.split(',')[1][:-1]  # find parent
+    
+    if p not in ptc:
+      ptc[p] = [c]
+    else:
+      if len(ptc[p]) == 2: return 'false'  
+      else: ptc[p].append(c)
+      # this parent already has 2 children. cannot add one more
+    if c in ctp: # c is already a child, cannot be child again
+      return 'false'
+    ctp[c] = p
+  
+  # check number of roots
+  for r in ptc:
+    if r not in ctp: 
+      if root == '': root = p  # first and should be the only root
+      else: return 'false'
+    
+  return 'true'
+
+# keep this function call here 
+print(TreeConstructor_web(input()))

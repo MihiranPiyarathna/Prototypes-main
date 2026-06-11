@@ -29,7 +29,7 @@ def LongestWord_sol(sen):
 print(LongestWord_sol(sen))
 
 ##############
-# my attempt - very recursive
+# my attempt
 
 def LongestWord(sen):
 

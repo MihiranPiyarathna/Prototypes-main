@@ -50,3 +50,11 @@ for e in nums:
 nums.clear()
 nums[:] = _nums[:]
 # print( nums, k)
+
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        
+        if not nums or len(nums)==0 : return 0
+        nums[:] = list(set(nums))
+        nums.sort()
+        return len(nums)
