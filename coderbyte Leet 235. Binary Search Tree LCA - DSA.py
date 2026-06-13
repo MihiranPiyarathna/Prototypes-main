@@ -159,4 +159,22 @@ class Solution:
                 return node
         return dfs(root)
 
-print(Solution().lowestCommonAncestor(root,p,q).val)
+# print(Solution().lowestCommonAncestor(root,p,q).val)
+
+# practicing 
+def lowestCommonAncestor_test(root, p, q):
+    if not root:
+        return 'None root'
+    def dfs(node):
+        if node.val == p.val or node.val == q.val or (p.val-node.val)* (q.val-node.val)<=0:
+            return node
+        elif p.val< node.val and q.val< node.val:
+            dfs(node.left)
+        else:
+            dfs(node.right)
+    
+    return dfs(root)
+
+print(lowestCommonAncestor_test(root,p,q).val)
+
+(p.val-root.val)* (q.val-root.val)<=-1

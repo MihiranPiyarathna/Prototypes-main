@@ -29,12 +29,12 @@ def LogitRegression(arr):
 
     delta = y - y_hat
     learning_rate = 1.0
+    # a_new = a - learning_rate * delta*x
+    # b_new = b - learning_rate * delta
 
     a_new = round((a - learning_rate*delta*x), 3)
     b_new = round((b - learning_rate*delta), 3)
     
-    # a = a - learning_rate * delta*x
-    # b = b - learning_rate * delta
 
     return str(a_new), str(b_new)
 

@@ -76,12 +76,13 @@ def trap_my(height):
         return water
 
 print(trap_my(height))
-# needs to be better, for longer arrays, takes too many repeats
+# needs to be better, for longer arrays, takes too many repeats. still O(n) acccording to coderbyte
 # spent 45hrs since start
 
 ##########
+# more robust solution (1 iteration) from niit in leet
+##########
 
-# more robust O(n) solution from niit in leet
 height =  [3, 0, 0, 2, 0, 4] # res = 10
 
 def trap(height):

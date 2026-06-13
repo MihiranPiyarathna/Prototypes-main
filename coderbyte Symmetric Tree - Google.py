@@ -17,14 +17,14 @@ arraybinary treesearchingheapGoogleFacebook
 """
 # from heapq import heappop, heappush
 # from collections import deque
-
+# above needed when traversing a real Tree. not needed in a str tree.
 
 strArr = ["4", "3", "4"] # false
 strArr = ["10", "2", "2", "#", "1", "1", "#"] # true
 
 # didn't know technique, found from solutions: https://youtu.be/ywAZyIjRmoo?t=55
 
-def SymmetricTree(strArr):
+def SymmetricTree_theoryfromweb(strArr):
 
     def is_mirror(left, right, p):
         # if not left and not right: return True
@@ -38,6 +38,29 @@ def SymmetricTree(strArr):
     return is_mirror(0,1,1)
 
 
-# from collections import deque
-SymmetricTree(strArr)
+SymmetricTree_theoryfromweb(strArr)
 # pass ; only traversal forulae is mine. theory from web 
+
+##########
+# coderbyte solution
+##########
+
+
+def SymmetricTree(strArr):
+
+  # code goes here
+  start, end = 1, 2
+  level = 2
+  while end < len(strArr):
+    temp = strArr[start:end+1]
+    if temp != temp[::-1]: return 'false'
+    start = end+1
+    level = level*2
+    end += level
+  return 'true'  
+  
+
+# keep this function call here 
+print(SymmetricTree(input()))
+
+##########

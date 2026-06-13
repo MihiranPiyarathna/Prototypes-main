@@ -87,7 +87,9 @@ def MatrixPath_my(strArr):
 print(MatrixPath_my(strArr))
 
 ##########
-  # code goes here
+  # coderbyte solution
+##########
+
 def MatrixPath_websolution(strArr):
   import numpy as np
   def path_check(b):
